@@ -1,7 +1,7 @@
 // Small helper module for talking to the PokéAPI.
 
 // Base endpoint for the list of Pokémon.
-export const POKE_API = "https://pokeapi.co/api/v2/pokemons";
+export const POKE_API = "https://pokeapi.co/api/v2/pokemon";
 
 // How many Pokémon we show per page.
 export const PAGE_SIZE = 20;
@@ -12,6 +12,10 @@ export const PAGE_SIZE = 20;
 export function getPokemonId(url) {
   const parts = url.split("/").filter(Boolean);
   return parts[parts.length - 1];
+}
+
+export function formatPokemonId(id) {
+  return String(id).padStart(3, "0");
 }
 
 // Official artwork for a given Pokémon id.

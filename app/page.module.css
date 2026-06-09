@@ -5,8 +5,119 @@
   padding: 40px 20px;
 }
 
+.header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.title {
+  color: #ef5350;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #666666;
+}
+
+.searchLabel {
+  display: block;
+  max-width: 360px;
+  margin: 0 auto 8px;
+  color: #444444;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.searchInput {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 24px;
+  padding: 10px 12px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #171717;
+  font: inherit;
+}
+
+.searchInput:focus {
+  outline: 3px solid rgba(239, 83, 80, 0.2);
+  border-color: #ef5350;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 16px;
+}
+
+.errorBox {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  background-color: #fdecea;
+  color: #b71c1c;
+  text-align: center;
+}
+
+.errorMessage {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.emptyText {
+  padding: 40px;
+  color: #666666;
+  text-align: center;
+}
+
+.skeletonCard {
+  min-height: 177px;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.skeletonImage,
+.skeletonLine,
+.skeletonLineShort {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #eeeeee, #f8f8f8, #eeeeee);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.skeletonImage {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+}
+
+.skeletonLineShort {
+  width: 48px;
+  height: 12px;
+  margin: 0 auto 8px;
+}
+
+.skeletonLine {
+  width: 84px;
+  height: 16px;
+  margin: 0 auto;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
 }

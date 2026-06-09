@@ -1,4 +1,5 @@
 .card {
+  width: 100%;
   border: 1px solid #e2e2e2;
   border-radius: 12px;
   padding: 16px;
@@ -6,11 +7,17 @@
   cursor: pointer;
   text-align: center;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font: inherit;
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card:focus-visible {
+  outline: 3px solid rgba(239, 83, 80, 0.35);
+  outline-offset: 3px;
 }
 
 .image {
@@ -27,6 +34,7 @@
 
 .name {
   margin-top: 4px;
+  color: #171717;
   font-size: 16px;
   font-weight: 600;
   text-transform: capitalize;

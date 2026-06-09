@@ -9,6 +9,16 @@
   z-index: 50;
 }
 
+.detailCard {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
 .closeButton {
   position: absolute;
   top: 12px;
@@ -17,5 +27,90 @@
   background: transparent;
   font-size: 22px;
   cursor: pointer;
-  color: #555;
+  color: #555555;
+}
+
+.image {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.name {
+  margin: 8px 0 4px;
+  font-size: 26px;
+  text-transform: capitalize;
+}
+
+.id {
+  color: #9aa0a6;
+  font-weight: 600;
+}
+
+.loadingText {
+  margin-top: 20px;
+}
+
+.details {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.types {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.typeBadge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.typeNormal { background-color: #a8a77a; }
+.typeFire { background-color: #ee8130; }
+.typeWater { background-color: #6390f0; }
+.typeElectric { background-color: #f7d02c; }
+.typeGrass { background-color: #7ac74c; }
+.typeIce { background-color: #96d9d6; }
+.typeFighting { background-color: #c22e28; }
+.typePoison { background-color: #a33ea1; }
+.typeGround { background-color: #e2bf65; }
+.typeFlying { background-color: #a98ff3; }
+.typePsychic { background-color: #f95587; }
+.typeBug { background-color: #a6b91a; }
+.typeRock { background-color: #b6a136; }
+.typeGhost { background-color: #735797; }
+.typeDragon { background-color: #6f35fc; }
+.typeDark { background-color: #705746; }
+.typeSteel { background-color: #b7b7ce; }
+.typeFairy { background-color: #d685ad; }
+.typeDefault { background-color: #ef5350; }
+
+.measurement {
+  margin: 4px 0;
+}
+
+.statsTitle {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+  font-size: 14px;
+}
+
+.statName {
+  text-transform: capitalize;
+}
+
+.statValue {
+  font-weight: 700;
 }

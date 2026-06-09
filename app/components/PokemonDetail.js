@@ -1,8 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPokemonId, getPokemonImage } from "../lib/pokeapi";
+import { formatPokemonId, getPokemonId, getPokemonImage } from "../lib/pokeapi";
 import styles from "./PokemonDetail.module.css";
+
+const TYPE_CLASS_BY_NAME = {
+  normal: "typeNormal",
+  fire: "typeFire",
+  water: "typeWater",
+  electric: "typeElectric",
+  grass: "typeGrass",
+  ice: "typeIce",
+  fighting: "typeFighting",
+  poison: "typePoison",
+  ground: "typeGround",
+  flying: "typeFlying",
+  psychic: "typePsychic",
+  bug: "typeBug",
+  rock: "typeRock",
+  ghost: "typeGhost",
+  dragon: "typeDragon",
+  dark: "typeDark",
+  steel: "typeSteel",
+  fairy: "typeFairy",
+};
+
+function getTypeClassName(typeName) {
+  const typeClass = TYPE_CLASS_BY_NAME[typeName] || "typeDefault";
+  return `${styles.typeBadge} ${styles[typeClass]}`;
+}
 
 // Expanded "detail card" shown on top of the page when a Pokémon is clicked.
 // It fetches the full details (types, stats, height, weight) for that Pokémon.
@@ -10,100 +36,62 @@ export default function PokemonDetail({ pokemon, onClose }) {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
+    let ignore = false;
+
     async function loadDetails() {
       const res = await fetch(pokemon.url);
       const data = await res.json();
-      setDetails(data);
+
+      if (!ignore) {
+        setDetails(data);
+      }
     }
+
     loadDetails();
+
+    return () => {
+      ignore = true;
+    };
   }, [pokemon]);
 
   const id = getPokemonId(pokemon.url);
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          position: "relative",
-          backgroundColor: "#fff",
-          borderRadius: "16px",
-          padding: "32px",
-          width: "100%",
-          maxWidth: "420px",
-          textAlign: "center",
-        }}
-      >
+      <div className={styles.detailCard} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
           ×
         </button>
 
-        <img
-          src={getPokemonImage(id)}
-          alt={pokemon.name}
-          style={{ width: "180px", height: "180px", objectFit: "contain" }}
-        />
+        <img className={styles.image} src={getPokemonImage(id)} alt={pokemon.name} />
 
-        <h2
-          style={{
-            textTransform: "capitalize",
-            fontSize: "26px",
-            margin: "8px 0 4px",
-          }}
-        >
-          {pokemon.name}
-        </h2>
-        <p style={{ color: "#9aa0a6", fontWeight: 600 }}>#{id}</p>
+        <h2 className={styles.name}>{pokemon.name}</h2>
+        <p className={styles.id}>#{formatPokemonId(id)}</p>
 
         {!details ? (
-          <p style={{ marginTop: "20px" }}>Loading details…</p>
+          <p className={styles.loadingText}>Loading details…</p>
         ) : (
-          <div style={{ marginTop: "16px", textAlign: "left" }}>
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-                justifyContent: "center",
-                marginBottom: "16px",
-              }}
-            >
+          <div className={styles.details}>
+            <div className={styles.types}>
               {details.types.map((t) => (
-                <span
-                  key={t.type.name}
-                  style={{
-                    backgroundColor: "#ef5350",
-                    color: "#fff",
-                    padding: "4px 12px",
-                    borderRadius: "999px",
-                    fontSize: "13px",
-                    textTransform: "capitalize",
-                  }}
-                >
+                <span key={t.type.name} className={getTypeClassName(t.type.name)}>
                   {t.type.name}
                 </span>
               ))}
             </div>
 
-            <p style={{ margin: "4px 0" }}>
+            <p className={styles.measurement}>
               <strong>Height:</strong> {details.height / 10} m
             </p>
-            <p style={{ margin: "4px 0" }}>
+            <p className={styles.measurement}>
               <strong>Weight:</strong> {details.weight / 10} kg
             </p>
 
-            <h3 style={{ marginTop: "16px", marginBottom: "8px" }}>Base stats</h3>
+            <h3 className={styles.statsTitle}>Base stats</h3>
             {details.stats.map((s) => (
-              <div
-                key={s.stat.name}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "14px",
-                  padding: "2px 0",
-                }}
-              >
-                <span style={{ textTransform: "capitalize" }}>{s.stat.name}</span>
-                <span style={{ fontWeight: 700 }}>{s.base_stat}</span>
+              <div key={s.stat.name} className={styles.statRow}>
+                <span className={styles.statName}>{s.stat.name}</span>
+                <span className={styles.statValue}>{s.base_stat}</span>
               </div>
             ))}
           </div>
